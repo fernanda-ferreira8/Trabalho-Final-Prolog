@@ -1,5 +1,5 @@
 
-%progenitores da família Pinheiro.
+%a) progenitores da família Pinheiro.
 
 progenitor(maria,joão).
 progenitor(maria, ana).
@@ -52,12 +52,8 @@ irmão(X, Y) :- masculino(X), progenitor(Z, X), progenitor(Z, Y).
 
 %caso base de descendente: Pessoa1 é descendente de Pessoa2, se Pessoa2 for progenitora dela? (sim
 descendente(X, Y) :- progenitor(Y, X).
-descendente(X, Y) :-
-    (	
-    	progenitor(Y, Z),
-    	descendente(X, Z)   
-    ).
-
+descendente(X, Y) :- progenitor(Y, Z), descendente(X, Z).
+                   
 
 %mãe
 mãe(X, Y) :-
@@ -89,36 +85,34 @@ primo(X, Y) :-
 %c) Formule regras, em Prolog, para responder as seguintes questões:
 
 %1. O João é filho do José?
-%progenitor(josé, joão).
+filho_de_jose(X):- pai(jose,X).
 
 %2. Quem são os filhos da Maria?
-%progenitor(maria, Filho).
-
+filhos_de_maria(Filho):- mae(maria, Filho). 
 
 %3. Quem são os primos do Mário?
-%primo(Primo, mário).
+primos_de_mario(X):- primo(X, mario), X \= mario. 
 
 
 %4. Quantos sobrinhos/sobrinhas com um Tio existem na família Pinheiro?
+sobrinho_ou_sobrinha_com_tio(Sobrinho, Tio) :-
+    setof(Sobrinho, tio(Tio, Sobrinho), Sobrinhos),
+    length(Sobrinhos, Comprimento),
+    write('Lista de sobrinhos com um tio(a): '),
+    writeln(Sobrinhos),
+	write('Quantidade: '),
+    write(Comprimento).
 
 
-%5. Quem são os ascendentes do Carlos?
-%descendente(carlos, Ascendente).
-
+%%5. Quem são os ascendentes do Carlos?
+ascendentes_de_carlos(Ascendentes) :- setof(Ascendente, descendente(carlos, Ascendente), Ascendentes).
 
 %6. A Helena tem irmãos? E irmãs?
-%irmão(Irmão, helena).
-%irmã(Irmã, helena).
-
+irmaos_helena(Irmaos) :- setof(Irmao, irmao(Irmao, helena), Irmaos).
+irmas_helena(Irmas) :-setof(Irma, irma(Irma, helena), Irmas).
 
 %7. Quem é avô/avó de Luciano?
-%avô(Avô, luciano).
-
+avô_ou_avó(X) :- progenitor(X, PaiDeNeto), progenitor(PaiDeNeto, luciano).
 
 %8. Quem tem netos na família Pinheiro?
-
-
-%progenitor(AvôAvó, Neto),
- %  descendente(Neto, AvôAvó),
-  % Neto \= AvôAvó.
-
+tem_netos(Avo, Neto) :- progenitor(Avo, PaiDeNeto), progenitor(PaiDeNeto, Neto).
