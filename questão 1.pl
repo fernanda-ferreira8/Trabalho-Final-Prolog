@@ -1,14 +1,5 @@
-%1) Pouco se sabe da história passada da família Pinheiro. Existem alguns registos antigos 
-%que indicam que o casal José e Maria criou quatro filhos, o João, Ana, Jéssica e Lucas. 
-%Ana teve duas filhas, a Helena e a Joana, também parece ser verdade, segundo os
-%mesmos registos que Joana teve dois filhos, Antônio e Juares. Além disso, o Mário é 
-%filho do João, pois muito se orgulha ele disso. Estranho também, foi constatar que o 
-%Carlos nasceu da relação entre a Helena, muito formosa, e o Mário. Jéssica teve 
-%apenas uma filha Heloisa e Lucas teve três filhos: Fagundes, Márcia e Júlio. Por fim, 
-%Márcia casou-se com Rodrigo e teve um filho, Luciano.
 
-%a) Utilizando o predicado progenitor(X,Y) (ou seja, X é progenitor de Y), represente em 
-%Prolog todos os progenitores da família Pinheiro.
+%progenitores da família Pinheiro.
 
 progenitor(maria,joão).
 progenitor(maria, ana).
@@ -55,65 +46,79 @@ masculino(juares).
 masculino(rodrigo).
 masculino(luciano).
 
-irmã(Pessoa1, Pessoa2) :- feminino(Pessoa1), progenitor(Pessoa, Pessoa1), progenitor(Pessoa, Pessoa2).
-irmão(Pessoa1, Pessoa2) :- masculino(Pessoa1), progenitor(Pessoa, Pessoa1), progenitor(Pessoa, Pessoa2).
+irmã(X, Y) :- feminino(X), progenitor(Z, X), progenitor(Z, Y).
+irmão(X, Y) :- masculino(X), progenitor(Z, X), progenitor(Z, Y).
+
 
 %caso base de descendente: Pessoa1 é descendente de Pessoa2, se Pessoa2 for progenitora dela? (sim
-descendente(Pessoa1, Pessoa2) :- progenitor(Pessoa2, Pessoa1).
-descendente(Pessoa1, Pessoa2) :-
+descendente(X, Y) :- progenitor(Y, X).
+descendente(X, Y) :-
     (	
-    	progenitor(Pessoa2, Pessoa3),
-    	descendente(Pessoa1, Pessoa3)   
+    	progenitor(Y, Z),
+    	descendente(X, Z)   
     ).
 
 
+%mãe
+mãe(X, Y) :-
+    feminino(X),
+    progenitor(X, Y).
 
+%pai
+pai(X, Y) :-
+    masculino(X),
+    progenitor(X, Y).
+
+%avô
+avô(X, Y) :-
+    progenitor(X, Z),
+    progenitor(Z, Y).
+
+%tio
+tio(X, Y) :-
+    irmão(X, Z),
+    progenitor(Z, Y).
+
+%primo
+primo(X, Y) :-
+    progenitor(Z1, X),
+    progenitor(Z2, Y),
+    irmão(Z1, Z2),
+    X \= Y.
 
 %c) Formule regras, em Prolog, para responder as seguintes questões:
 
 %1. O João é filho do José?
-
-
-
-
-
-
-
+%progenitor(josé, joão).
 
 %2. Quem são os filhos da Maria?
-
+%progenitor(maria, Filho).
 
 
 %3. Quem são os primos do Mário?
-
+%primo(Primo, mário).
 
 
 %4. Quantos sobrinhos/sobrinhas com um Tio existem na família Pinheiro?
 
 
-
-
-
-
 %5. Quem são os ascendentes do Carlos?
-
+%descendente(carlos, Ascendente).
 
 
 %6. A Helena tem irmãos? E irmãs?
-
-
-
+%irmão(Irmão, helena).
+%irmã(Irmã, helena).
 
 
 %7. Quem é avô/avó de Luciano?
-
-
-
+%avô(Avô, luciano).
 
 
 %8. Quem tem netos na família Pinheiro?
 
 
-
-
+%progenitor(AvôAvó, Neto),
+ %  descendente(Neto, AvôAvó),
+  % Neto \= AvôAvó.
 
