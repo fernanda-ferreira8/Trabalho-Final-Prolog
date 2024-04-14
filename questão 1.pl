@@ -100,7 +100,7 @@ sobrinho_ou_sobrinha_com_tio(Sobrinho, Tio) :-
     length(Sobrinhos, Comprimento),
     write('Lista de sobrinhos com um tio(a): '),
     writeln(Sobrinhos),
-	write('Quantidade: '),
+    write('Quantidade: '),
     write(Comprimento).
 
 
