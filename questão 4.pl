@@ -16,6 +16,6 @@ main :-
         write('O fatorial do numero digitado é '), 
         write(F), nl,
         ! ;    % é o "corte" que para o loop
-        write('Número inválido! Por favor, digite novamente.'), nl,
-        fail % fail é usado para continuar com o loop
+        write('Numero invalido. Entre com um valor maior que 0'), nl,
+        fail % fail é usado para voltar com o loop
     ).
