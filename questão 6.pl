@@ -2,7 +2,7 @@
 
 % Predicado principal para ler os dados do arquivo e armazenar na base de conhecimento
 calculo :-
-    open('questão 6.txt', read, Arquivo), % Abrindo o arquivo para leitura
+    open('C:\Prolog\questão 6', read, Arquivo), % Abrindo o arquivo para leitura
     ler_clientes(Arquivo), % Chamando o predicado auxiliar para ler os clientes
     close(Arquivo). % Fechando o arquivo após a leitura
 
