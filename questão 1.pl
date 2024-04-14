@@ -1,65 +1,77 @@
-%1) Pouco se sabe da histÛria passada da famÌlia Pinheiro. Existem alguns registos antigos
-%que indicam que o casal JosÈ e Maria criou quatro filhos, o Jo„o, Ana, JÈssica e Lucas.
-%Ana teve duas filhas, a Helena e a Joana, tambÈm parece ser verdade, segundo os
-%mesmos registos que Joana teve dois filhos, AntÙnio e Juares. AlÈm disso, o M·rio È
-%filho do Jo„o, pois muito se orgulha ele disso. Estranho tambÈm, foi constatar que o
-%Carlos nasceu da relaÁ„o entre a Helena, muito formosa, e o M·rio. JÈssica teve
-%apenas uma filha Heloisa e Lucas teve trÍs filhos: Fagundes, M·rcia e J˙lio. Por fim,
-%M·rcia casou-se com Rodrigo e teve um filho, Luciano.
+%1) Pouco se sabe da hist√≥ria passada da fam√≠lia Pinheiro. Existem alguns registos antigos 
+%que indicam que o casal Jos√© e Maria criou quatro filhos, o Jo√£o, Ana, J√©ssica e Lucas. 
+%Ana teve duas filhas, a Helena e a Joana, tamb√©m parece ser verdade, segundo os
+%mesmos registos que Joana teve dois filhos, Ant√¥nio e Juares. Al√©m disso, o M√°rio √© 
+%filho do Jo√£o, pois muito se orgulha ele disso. Estranho tamb√©m, foi constatar que o 
+%Carlos nasceu da rela√ß√£o entre a Helena, muito formosa, e o M√°rio. J√©ssica teve 
+%apenas uma filha Heloisa e Lucas teve tr√™s filhos: Fagundes, M√°rcia e J√∫lio. Por fim, 
+%M√°rcia casou-se com Rodrigo e teve um filho, Luciano.
 
-%a) Utilizando o predicado progenitor(X,Y) (ou seja, X È progenitor de Y), represente em
-%Prolog todos os progenitores da famÌlia Pinheiro.
+%a) Utilizando o predicado progenitor(X,Y) (ou seja, X √© progenitor de Y), represente em 
+%Prolog todos os progenitores da fam√≠lia Pinheiro.
 
-progenitor(maria,jo„o).
+progenitor(maria,jo√£o).
 progenitor(maria, ana).
-progenitor(maria, jÈssica).
+progenitor(maria, j√©ssica).
 progenitor(maria, lucas).
-progenitor(josÈ,jo„o).
-progenitor(josÈ, ana).
-progenitor(josÈ, jÈssica).
-progenitor(josÈ, lucas).
-progenitor(jo„o, m·rio).
+progenitor(jos√©,jo√£o).
+progenitor(jos√©, ana).
+progenitor(jos√©, j√©ssica).
+progenitor(jos√©, lucas).
+progenitor(jo√£o, m√°rio).
 progenitor(ana, helena).
 progenitor(ana, joana).
-progenitor(jÈssica, heloisa).
-progenitor(lucas, j˙lio).
+progenitor(j√©ssica, heloisa).
+progenitor(lucas, j√∫lio).
 progenitor(lucas, fagundes).
-progenitor(lucas, m·rcia).
-progenitor(mario, carlos).
+progenitor(lucas, m√°rcia).
+progenitor(m√°rio, carlos).
 progenitor(helena, carlos).
-progenitor(joana, antÙnio).
+progenitor(joana, ant√¥nio).
 progenitor(joana, juares).
-progenitor(m·rcia, luciano).
+progenitor(m√°rcia, luciano).
 progenitor(rodrigo, luciano).
 
 
-%b) Represente em Prolog as relaÁıes: sexo (masculino ou feminino), irm„, irm„o,
-%descendente, m„e, pai, avÙ, tio, primo.
+%b) Represente em Prolog as rela√ß√µes: sexo (masculino ou feminino), irm√£, irm√£o, 
+%descendente, m√£e, pai, av√¥, tio, primo.
 
 feminino(maria).
 feminino(ana).
-feminino(jÈssica).
+feminino(j√©ssica).
 feminino(helena).
 feminino(joana).
 feminino(heloisa).
-feminino(m·rcia).
-masculino(josÈ).
-masculino(jo„o).
+feminino(m√°rcia).
+masculino(jos√©).
+masculino(jo√£o).
 masculino(lucas).
-masculino(m·rio).
-masculino(j˙lio).
+masculino(m√°rio).
+masculino(j√∫lio).
 masculino(fagundes).
 masculino(carlos).
-masculino(antÙnio).
+masculino(ant√¥nio).
 masculino(juares).
 masculino(rodrigo).
 masculino(luciano).
 
-irm„(Pessoa1, Pessoa2) :- feminino(Pessoa1), progenitor(Pessoa, Pessoa1), progenitor(Pessoa, Pessoa2).
-irm„o(Pessoa1, Pessoa2) :- masculino(Pessoa1), progenitor(Pessoa, Pessoa1), progenitor(Pessoa, Pessoa2).
-descendente(Pessoa1, Pessoa2):-
-    (   progenitor(Pessoa, Pessoa2),
-        descendente(Pessoa2,
+irm√£(Pessoa1, Pessoa2) :- feminino(Pessoa1), progenitor(Pessoa, Pessoa1), progenitor(Pessoa, Pessoa2).
+irm√£o(Pessoa1, Pessoa2) :- masculino(Pessoa1), progenitor(Pessoa, Pessoa1), progenitor(Pessoa, Pessoa2).
+
+%caso base de descendente: Pessoa1 √© descendente de Pessoa2, se Pessoa2 for progenitora dela? (sim
+descendente(Pessoa1, Pessoa2) :- progenitor(Pessoa2, Pessoa1).
+descendente(Pessoa1, Pessoa2) :-
+    (	
+    	progenitor(Pessoa2, Pessoa3),
+    	descendente(Pessoa1, Pessoa3)   
+    ).
+
+
+
+
+%c) Formule regras, em Prolog, para responder as seguintes quest√µes:
+
+%1. O Jo√£o √© filho do Jos√©?
 
 
 
@@ -68,47 +80,40 @@ descendente(Pessoa1, Pessoa2):-
 
 
 
-
-
-%c) Formule regras, em Prolog, para responder as seguintes questıes:
-
-%1. O Jo„o È filho do JosÈ?
+%2. Quem s√£o os filhos da Maria?
 
 
 
+%3. Quem s√£o os primos do M√°rio?
 
 
 
-
-
-%2. Quem s„o os filhos da Maria?
-
-
-
-%3. Quem s„o os primos do M·rio?
-
-
-
-%4. Quantos sobrinhos/sobrinhas com um Tio existem na famÌlia Pinheiro?
+%4. Quantos sobrinhos/sobrinhas com um Tio existem na fam√≠lia Pinheiro?
 
 
 
 
 
 
-%5. Quem s„o os ascendentes do Carlos?
+%5. Quem s√£o os ascendentes do Carlos?
 
 
 
-%6. A Helena tem irm„os? E irm„s?
+%6. A Helena tem irm√£os? E irm√£s?
 
 
 
 
 
-%7. Quem È avÙ/avÛ de Luciano?
+%7. Quem √© av√¥/av√≥ de Luciano?
 
 
 
-%8. Quem tem netos na famÌlia Pinheiro?
+
+
+%8. Quem tem netos na fam√≠lia Pinheiro?
+
+
+
+
 
