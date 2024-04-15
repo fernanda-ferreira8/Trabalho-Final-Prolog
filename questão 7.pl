@@ -1,14 +1,14 @@
-:- dynamic cliente/4. % Definindo o predicado dinâmico cliente/4
+:- dynamic cliente/4. % Definindo o predicado dinÃ¢mico cliente/4
 
 % Predicado principal para ler os dados do arquivo e armazenar na base de conhecimento
 calculo :-
     open('exercicio6.txt', read, Arquivo), % Abrindo o arquivo para leitura
     ler_clientes(Arquivo), % Chamando o predicado auxiliar para ler os clientes
-    close(Arquivo). % Fechando o arquivo após a leitura
+    close(Arquivo). % Fechando o arquivo apÃ³s a leitura
 
-%Caso Base: Finaliza quando não há mais clientes para ler
+%Caso Base: Finaliza quando nÃ£o hÃ¡ mais clientes para ler
 ler_clientes(Arquivo) :-
-    \+ at_end_of_stream(Arquivo), % Verifica se ainda não chegou ao final do arquivo
+    \+ at_end_of_stream(Arquivo), % Verifica se ainda nÃ£o chegou ao final do arquivo
     !,
     ler_cliente(Arquivo),
     ler_clientes(Arquivo).
@@ -17,30 +17,30 @@ ler_clientes(_). % Caso base, finaliza a leitura do arquivo
 
 % Predicado para ler um cliente do arquivo
 ler_cliente(Arquivo) :-
-    read(Arquivo, Cliente), % Lendo o próximo termo do arquivo
-    assert(Cliente). % Adicionando o termo lido à base de conhecimento
+    read(Arquivo, Cliente), % Lendo o prÃ³ximo termo do arquivo
+    assert(Cliente). % Adicionando o termo lido Ã  base de conhecimento
 
-% Predicado para gerar uma linha do relatório para um cliente
+% Predicado para gerar uma linha do relatÃ³rio para um cliente
 gerar_relatorio(cliente(Nome, Idade, Salario, NroDependentes)) :-
-    write(Nome), write_spaces(Nome, 20), % Nome (completa até 20 caracteres)
-    write(Idade), write_spaces(Idade, 10), % Idade (completa até 10 caracteres)
-    write(Salario), write_spaces(Salario, 10), % Salario (completa até 10 caracteres)
-    write(NroDependentes), % Número de Dependentes
+    write(Nome), write_spaces(Nome, 20), % Nome (completa atÃ© 20 caracteres)
+    write(Idade), write_spaces(Idade, 10), % Idade (completa atÃ© 10 caracteres)
+    write(Salario), write_spaces(Salario, 10), % Salario (completa atÃ© 10 caracteres)
+    write(NroDependentes), % NÃºmero de Dependentes
     nl. % Nova linha
 
-% Predicado para escrever espaços em branco após um termo
+% Predicado para escrever espaÃ§os em branco apÃ³s um termo
 write_spaces(Termo, N) :-
-    atom_length(Termo, L), % Obtém o comprimento do termo
-    Espacos is N - L, % Calcula o número de espaços necessários
-    write_spaces_aux(Espacos). % Escreve os espaços
+    atom_length(Termo, L), % ObtÃ©m o comprimento do termo
+    Espacos is N - L, % Calcula o nÃºmero de espaÃ§os necessÃ¡rios
+    write_spaces_aux(Espacos). % Escreve os espaÃ§os
 
-write_spaces_aux(0). % Caso base, não escreve mais espaços
+write_spaces_aux(0). % Caso base, nÃ£o escreve mais espaÃ§os
 write_spaces_aux(N) :-
-    write(' '), % Escreve um espaço
-    N1 is N - 1, % Reduz o contador de espaços restantes
-    write_spaces_aux(N1). % Chamada recursiva para escrever mais espaços
+    write(' '), % Escreve um espaÃ§o
+    N1 is N - 1, % Reduz o contador de espaÃ§os restantes
+    write_spaces_aux(N1). % Chamada recursiva para escrever mais espaÃ§os
 
-    %Questão 7
+    %QuestÃ£o 7
     % Predicado principal para ler o arquivo e calcular a soma dos dependentes
 somaDependentes :-
     write('Abrindo o arquivo "exercicio6.txt"...'), nl,
@@ -51,7 +51,7 @@ somaDependentes :-
     write('Soma total de dependentes: '), write(SomaDependentes), nl,
     gravar_soma_em_arquivo(SomaDependentes).
 
-% Caso Base: Finaliza quando não há mais clientes para ler
+% Caso Base: Finaliza quando nÃ£o hÃ¡ mais clientes para ler
 ler_clientes_e_calcular_soma(Arquivo, SomaAtual, SomaDependentesFinal) :-
     (   at_end_of_stream(Arquivo) ->
         SomaDependentesFinal = SomaAtual
@@ -64,7 +64,7 @@ ler_clientes_e_calcular_soma(_, SomaAtual, SomaAtual). % Caso base, finaliza a s
 
 % Predicado para ler um cliente do arquivo e calcular a soma dos dependentes
 ler_cliente_e_calcular_soma(Arquivo, SomaAtual, SomaDependentesFinal) :-
-    read(Arquivo, cliente(_, _, _, NroDependentes)), % Lendo o próximo termo do arquivo
+    read(Arquivo, cliente(_, _, _, NroDependentes)), % Lendo o prÃ³ximo termo do arquivo
     NovoSoma is SomaAtual + NroDependentes, % Calcula a nova soma
     ler_clientes_e_calcular_soma(Arquivo, NovoSoma, SomaDependentesFinal).
 
@@ -72,4 +72,4 @@ ler_cliente_e_calcular_soma(Arquivo, SomaAtual, SomaDependentesFinal) :-
 gravar_soma_em_arquivo(SomaDependentes) :-
     open('soma.txt', write, Arquivo), % Abrindo o arquivo "soma.txt" para escrita
     write(Arquivo, SomaDependentes), % Escrevendo a soma no arquivo
-    close(Arquivo). % Fechando o arquivo após a escrita
+    close(Arquivo). % Fechando o arquivo apÃ³s a escrita
