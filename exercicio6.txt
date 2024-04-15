@@ -1,0 +1,3 @@
+cliente('Alice', 30, 4000, 2).
+cliente('Bob', 45, 6000, 3).
+cliente('Carol', 28, 3500, 1).
