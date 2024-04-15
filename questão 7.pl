@@ -2,7 +2,7 @@
 
 % Predicado principal para ler os dados do arquivo e armazenar na base de conhecimento
 calculo :-
-    open('exercicio6.txt', read, Arquivo), % Abrindo o arquivo para leitura
+    open('exercicio7.txt', read, Arquivo), % Abrindo o arquivo para leitura
     ler_clientes(Arquivo), % Chamando o predicado auxiliar para ler os clientes
     close(Arquivo). % Fechando o arquivo após a leitura
 
@@ -43,8 +43,8 @@ write_spaces_aux(N) :-
     %Questão 7
     % Predicado principal para ler o arquivo e calcular a soma dos dependentes
 somaDependentes :-
-    write('Abrindo o arquivo "exercicio6.txt"...'), nl,
-    open('exercicio6.txt', read, Arquivo),
+    write('Abrindo o arquivo "exercicio7.txt"...'), nl,
+    open('exercicio7.txt', read, Arquivo),
     write('Arquivo aberto com sucesso.'), nl,
     ler_clientes_e_calcular_soma(Arquivo, 0, SomaDependentes),
     close(Arquivo),
