@@ -1,5 +1,4 @@
-
-ler(Nome) :- repeat,
+Ler(Nome) :- repeat,
     read(N),
     (N == end_of_file -> !;
      read(I),
@@ -9,11 +8,10 @@ ler(Nome) :- repeat,
      fail)).
 
 abrir() :-
-    open('C:/Users/ferre/Desktop/2023.2/Programação Lógica/Trabalho Final/arquivos.txt', read, X),
+    open('C:/Users/ferre/Documents/trabalho/arquivos.txt', read, X),
     write('Insira um nome: '),
     read(Nome),
     set_input(X),
     ler(Nome),
     set_input(user),
     close(X).
-
